@@ -1,0 +1,37 @@
+<body>
+  <main></main>
+</body>
+<script>
+  async function getContent(){
+    try{
+      const response = await fetch('http://localhost:4567/everything')
+      const data = await response.json()
+      show(data)
+    }catch(err){
+      console.log(err)
+    }
+  }
+
+  getContent()
+
+  function show(items){
+    let output = 
+    `<table border="1">
+      <tr>
+        <td>AUTOR</td>
+        <td>TÍTULO</td>
+        <td>DESCRIÇÃO</td>
+      </tr>`
+
+    for(let item of items){
+      output += '<tr>'
+      output += `<td>${item.author}</td>`
+      output += `<td>${item.title}</td>`
+      output += `<td>${item.description}</td>`
+      output += '</tr>'
+    }
+    output += '</table>'
+
+    document.querySelector('main').innerHTML = output
+  }
+</script>
